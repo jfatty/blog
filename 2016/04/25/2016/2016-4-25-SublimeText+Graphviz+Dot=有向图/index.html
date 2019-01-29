@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="无">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Sublime Text + Graphviz + Dot 来绘制有向图">
+<meta property="og:url" content="http://bxh7425014.github.io/blog/2016/04/25/2016/2016-4-25-SublimeText+Graphviz+Dot=有向图/index.html">
+<meta property="og:site_name" content="一一小知">
+<meta property="og:description" content="无">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1124873-1782b2982205c325.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1124873-8d236356c51d4c7d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1124873-67688cd634d43522.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1124873-4653635b22070622.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1124873-c6bfcddf10b101a8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1124873-4a2d88dc6716d9e8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1124873-c8e365e33b098732.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1124873-7aa6088d7664bffa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1124873-ce3748fba8814270.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1124873-f023764884cfcbe6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1124873-3fc1638d6d7cb3b7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1124873-43070dec615582d5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1124873-b33962a8c9695711.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1124873-b0748577409021da.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1124873-a8843a2abc096985.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-01-29T10:45:22.843Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用Sublime Text + Graphviz + Dot 来绘制有向图">
+<meta name="twitter:description" content="无">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1124873-1782b2982205c325.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://bxh7425014.github.io/blog/2016/04/25/2016/2016-4-25-SublimeText+Graphviz+Dot=有向图/">
+
+
+
+
+
+  <title>使用Sublime Text + Graphviz + Dot 来绘制有向图 | 一一小知</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一一小知</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">小知Blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bxh7425014.github.io/blog/2016/04/25/2016/2016-4-25-SublimeText+Graphviz+Dot=有向图/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="无">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一一小知">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">使用Sublime Text + Graphviz + Dot 来绘制有向图</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-25T00:00:00+08:00">
+                2016-04-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  无
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Graphviz介绍"><a href="#Graphviz介绍" class="headerlink" title="Graphviz介绍"></a>Graphviz介绍</h1><p>介绍一个高效而简洁的绘图工具graphviz。graphviz是贝尔实验室开发的一个开源的工具包，它使用一个特定的DSL(领域特定语言): dot作为脚本语言，然后使用布局引擎来解析此脚本，并完成自动布局。graphviz提供丰富的导出格式，如常用的图片格式，SVG，PDF格式等。</p>
+<p>graphviz中包含了众多的布局器：</p>
+<ul>
+<li>dot 默认布局方式，主要用于有向图</li>
+<li>neato 基于spring-model(又称force-based)算法</li>
+<li>twopi 径向布局</li>
+<li>circo 圆环布局</li>
+<li>fdp 用于无向图</li>
+</ul>
+<p>本文主要介绍dot有向图。</p>
+<p>首先，在dot脚本中定义图的顶点和边，顶点和边都具有各自的属性，比如形状，颜色，填充模式，字体，样式等。然后使用合适的布局算法进行布局。布局算法除了绘制各个顶点和边之外，需要尽可能的将顶点均匀的分布在画布上，并且尽可能的减少边的交叉(如果交叉过多，就很难看清楚顶点之间的关系了)。所以使用graphviz的一般流程为：</p>
+<ol>
+<li>定义一个图，并向图中添加需要的顶点和边</li>
+<li>为顶点和边添加样式</li>
+<li>使用布局引擎进行绘制</li>
+</ol>
+<p>在我的机器上，使用Sublime Text 编辑dot脚本，然后将F7/Cmd-B映射为调用dot引擎去绘制当前脚本，并打开一个新的窗口来显示运行结果：</p>
+<h1 id="Sublime-Text-3-集成Graphviz方法"><a href="#Sublime-Text-3-集成Graphviz方法" class="headerlink" title="Sublime Text 3 集成Graphviz方法"></a>Sublime Text 3 集成Graphviz方法</h1><p>如下：<br>第一步：下载<a href="https://github.com/munro/SublimeGraphvizPreview/archive/master.zip" target="_blank" rel="noopener">https://github.com/munro/SublimeGraphvizPreview/archive/master.zip</a><br>第二步：打开Preferences -&gt; Packages Settings-&gt; Packages Control -&gt; Settings User，来确认一下installed_packages没有GraphVizPreview。并且增加”remove_orphaned”: false防止Sublime Text 把手动安装的插件包给删除了。<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"bootstrapped"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"in_process_packages"</span>:</span><br><span class="line">  [</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"installed_packages"</span>:</span><br><span class="line">  [</span><br><span class="line">  <span class="string">"EncodingHelper"</span>,</span><br><span class="line">  <span class="string">"Package Control"</span>,</span><br><span class="line">  <span class="string">"Theme - Spacegray"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"remove_orphaned"</span>: <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>第三步：打开Preferences -&gt; Browse Packages…进入到Sublime Text的插件包下Packagas。<br>第四步：解压zip文件到Packagas下，并且更改文件夹SublimeGraphvizPreview-master为GraphVizPreview。<br>第五步：重启Sublime Text。</p>
+<blockquote>
+<p>注：快捷键为<code>Win</code>+<code>Shift</code>+<code>G</code>，调用Graphviz 调用dot引擎去绘制当前脚本。</p>
+</blockquote>
+<h1 id="使用graphviz绘制流程图"><a href="#使用graphviz绘制流程图" class="headerlink" title="使用graphviz绘制流程图"></a>使用graphviz绘制流程图</h1><p><img src="http://upload-images.jianshu.io/upload_images/1124873-1782b2982205c325.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>注：引用image图片的时候，需要使用命令，<br>使用 dot 命令编译，如</p>
+<p>dot hello.dot -T png -o hello.png</p>
+<p>完整的命令为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">＜cmd＞ ＜inputfile＞ -T ＜format＞ -o ＜outputfile＞</span><br></pre></td></tr></table></figure></p>
+<p>示例如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\\&gt;dot -Tjpg tes.dot -o test.jpg</span><br></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th><code>&lt;cmd&gt;</code></th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dot</td>
+<td>渲染的图具有明确方向性。</td>
+</tr>
+<tr>
+<td>neato</td>
+<td>渲染的图缺乏方向性。</td>
+</tr>
+<tr>
+<td>twopi</td>
+<td>渲染的图采用放射性布局。</td>
+</tr>
+<tr>
+<td>circo</td>
+<td>渲染的图采用环型布局。</td>
+</tr>
+<tr>
+<td>fdp</td>
+<td>渲染的图缺乏方向性。</td>
+</tr>
+<tr>
+<td>sfdp</td>
+<td>渲染大型的图，图片缺乏方向性。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><p>graphviz包含3中元素，图，顶点和边。每个元素都可以具有各自的属性，用来定义字体，样式，颜色，形状等。</p>
+<h2 id="第一个graphviz图"><a href="#第一个graphviz图" class="headerlink" title="第一个graphviz图"></a>第一个graphviz图</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">digraph abc&#123;</span><br><span class="line">  a;</span><br><span class="line">  b;</span><br><span class="line">  c;</span><br><span class="line">  d;</span><br><span class="line"> </span><br><span class="line">  a -&gt; b;</span><br><span class="line">  b -&gt; d;</span><br><span class="line">  c -&gt; d;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/1124873-8d236356c51d4c7d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<h2 id="定义顶点和边的样式"><a href="#定义顶点和边的样式" class="headerlink" title="定义顶点和边的样式"></a>定义顶点和边的样式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">digraph abc&#123;</span><br><span class="line">  node [shape=&quot;record&quot;];</span><br><span class="line">  edge [style=&quot;dashed&quot;];</span><br><span class="line">  a;</span><br><span class="line">  b;</span><br><span class="line">  c;</span><br><span class="line">  d;</span><br><span class="line"> </span><br><span class="line">  a -&gt; b;</span><br><span class="line">  b -&gt; d;</span><br><span class="line">  c -&gt; d;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/1124873-67688cd634d43522.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<h2 id="进一步修改顶点和边样式"><a href="#进一步修改顶点和边样式" class="headerlink" title="进一步修改顶点和边样式"></a>进一步修改顶点和边样式</h2><p>将顶点a的颜色改为淡绿色，并将c到d的边改为红色。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">digraph abc&#123;</span><br><span class="line">  node [shape=&quot;record&quot;];</span><br><span class="line">  edge [style=&quot;dashed&quot;];</span><br><span class="line"> </span><br><span class="line">  a [style=&quot;filled&quot;, color=&quot;black&quot;, fillcolor=&quot;chartreuse&quot;];</span><br><span class="line">  b;</span><br><span class="line">  c;</span><br><span class="line">  d;</span><br><span class="line"> </span><br><span class="line">  a -&gt; b;</span><br><span class="line">  b -&gt; d;</span><br><span class="line">  c -&gt; d [color=&quot;red&quot;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1124873-4653635b22070622.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<h2 id="子图的绘制"><a href="#子图的绘制" class="headerlink" title="子图的绘制"></a>子图的绘制</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">digraph abc&#123;</span><br><span class="line"> </span><br><span class="line">  node [shape=&quot;record&quot;];</span><br><span class="line">  edge [style=&quot;dashed&quot;];</span><br><span class="line"> </span><br><span class="line">  a [style=&quot;filled&quot;, color=&quot;black&quot;, fillcolor=&quot;chartreuse&quot;];</span><br><span class="line">  b;</span><br><span class="line"> </span><br><span class="line">    subgraph cluster_cd&#123;</span><br><span class="line">      label=&quot;c and d&quot;;</span><br><span class="line">      bgcolor=&quot;blue&quot;;</span><br><span class="line">      c;</span><br><span class="line">      d;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">  a -&gt; b;</span><br><span class="line">  b -&gt; d;</span><br><span class="line">  c -&gt; d [color=&quot;red&quot;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/1124873-c6bfcddf10b101a8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<blockquote>
+<p>注:子图的名称必须以cluster开头，否则graphviz无法设别。</p>
+</blockquote>
+<h2 id="数据结构的可视化"><a href="#数据结构的可视化" class="headerlink" title="数据结构的可视化"></a>数据结构的可视化</h2><h3 id="一个hash表的数据结构"><a href="#一个hash表的数据结构" class="headerlink" title="一个hash表的数据结构"></a>一个hash表的数据结构</h3><p>hash表内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">struct st_hash_type &#123;</span><br><span class="line">    int (*compare) ();</span><br><span class="line">    int (*hash) ();</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line">struct st_table_entry &#123;</span><br><span class="line">    unsigned int hash;</span><br><span class="line">    char *key;</span><br><span class="line">    char *record;</span><br><span class="line">    st_table_entry *next;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line">struct st_table &#123;</span><br><span class="line">    struct st_hash_type *type;</span><br><span class="line">    int num_bins;</span><br><span class="line">/* slot count */</span><br><span class="line">    int num_entries;</span><br><span class="line">/* total number of entries */</span><br><span class="line">    struct st_table_entry **bins;</span><br><span class="line">/* slot */</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>脚本如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">digraph st2&#123;</span><br><span class="line">  fontname = &quot;Verdana&quot;;</span><br><span class="line">  fontsize = 10;</span><br><span class="line">  rankdir=TB;</span><br><span class="line"> </span><br><span class="line">  node [fontname = &quot;Verdana&quot;, fontsize = 10, color=&quot;skyblue&quot;, shape=&quot;record&quot;];</span><br><span class="line"> </span><br><span class="line">  edge [fontname = &quot;Verdana&quot;, fontsize = 10, color=&quot;crimson&quot;, style=&quot;solid&quot;];</span><br><span class="line"> </span><br><span class="line">  st_hash_type [label=&quot;&#123;&lt;head&gt;st_hash_type|(*compare)|(*hash)&#125;&quot;];</span><br><span class="line">  st_table_entry [label=&quot;&#123;&lt;head&gt;st_table_entry|hash|key|record|&lt;next&gt;next&#125;&quot;];</span><br><span class="line">  st_table [label=&quot;&#123;st_table|&lt;type&gt;type|num_bins|num_entries|&lt;bins&gt;bins&#125;&quot;];</span><br><span class="line"> </span><br><span class="line">  st_table:bins -&gt; st_table_entry:head;</span><br><span class="line">  st_table:type -&gt; st_hash_type:head;</span><br><span class="line">  st_table_entry:next -&gt; st_table_entry:head [style=&quot;dashed&quot;, color=&quot;forestgreen&quot;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1124873-4a2d88dc6716d9e8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<blockquote>
+<p>注：在顶点的形状为record的时候，label属性的语法比较奇怪，但是使用起来非常灵活。比如，用竖线”|”隔开的串会在绘制出来的节点中展现为一条分隔符。用&lt;&gt;括起来的串称为锚点，当一个节点具有多个锚点的时候，这个特性会非常有用，比如节点st_table的type属性指向st_hash_type，第4个属性指向st_table_entry等，都是通过锚点来实现的。</p>
+</blockquote>
+<p>使用默认的dot布局后，绿色的这条边覆盖了数据结构st_table_entry，并不美观，因此可以使用别的布局方式来重新布局，如使用circo算法可以得到更加合理的布局结果。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\\&gt;circo -Tjpg tes.dot -o test.jpg</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1124873-c8e365e33b098732.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<h3 id="hash表的实例"><a href="#hash表的实例" class="headerlink" title="hash表的实例"></a>hash表的实例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">digraph st&#123;</span><br><span class="line">  fontname = &quot;Verdana&quot;;</span><br><span class="line">  fontsize = 10;</span><br><span class="line">  rankdir = LR;</span><br><span class="line">  rotate = 90;</span><br><span class="line"> </span><br><span class="line">  node [ shape=&quot;record&quot;, width=.1, height=.1];</span><br><span class="line">  node [fontname = &quot;Verdana&quot;, fontsize = 10, color=&quot;skyblue&quot;, shape=&quot;record&quot;];</span><br><span class="line"> </span><br><span class="line">  edge [fontname = &quot;Verdana&quot;, fontsize = 10, color=&quot;crimson&quot;, style=&quot;solid&quot;];</span><br><span class="line">  node [shape=&quot;plaintext&quot;];</span><br><span class="line"> </span><br><span class="line">  st_table [label=&lt;</span><br><span class="line">      &lt;table border=&quot;0&quot; cellborder=&quot;1&quot; cellspacing=&quot;0&quot; align=&quot;left&quot;&gt;</span><br><span class="line">      &lt;tr&gt;</span><br><span class="line">      &lt;td&gt;st_table&lt;/td&gt;</span><br><span class="line">      &lt;/tr&gt;</span><br><span class="line">      &lt;tr&gt;</span><br><span class="line">      &lt;td&gt;num_bins=5&lt;/td&gt;</span><br><span class="line">      &lt;/tr&gt;</span><br><span class="line">      &lt;tr&gt;</span><br><span class="line">      &lt;td&gt;num_entries=3&lt;/td&gt;</span><br><span class="line">      &lt;/tr&gt;</span><br><span class="line">      &lt;tr&gt;</span><br><span class="line">      &lt;td port=&quot;bins&quot;&gt;bins&lt;/td&gt;</span><br><span class="line">      &lt;/tr&gt;</span><br><span class="line">      &lt;/table&gt;</span><br><span class="line">  &gt;];</span><br><span class="line"> </span><br><span class="line">  node [shape=&quot;record&quot;];</span><br><span class="line">  num_bins [label=&quot; &lt;b1&gt; | &lt;b2&gt; | &lt;b3&gt; | &lt;b4&gt; | &lt;b5&gt; &quot;, height=2];</span><br><span class="line">  node[ width=2 ];</span><br><span class="line"> </span><br><span class="line">  entry_1 [label=&quot;&#123;&lt;e&gt;st_table_entry|&lt;next&gt;next&#125;&quot;];</span><br><span class="line">  entry_2 [label=&quot;&#123;&lt;e&gt;st_table_entry|&lt;next&gt;null&#125;&quot;];</span><br><span class="line">  entry_3 [label=&quot;&#123;&lt;e&gt;st_table_entry|&lt;next&gt;null&#125;&quot;];</span><br><span class="line"> </span><br><span class="line">  st_table:bins -&gt; num_bins:b1;</span><br><span class="line">  num_bins:b1 -&gt; entry_1:e;</span><br><span class="line">  entry_1:next -&gt; entry_2:e;</span><br><span class="line">  num_bins:b3 -&gt; entry_3:e;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/1124873-7aa6088d7664bffa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<blockquote>
+<p>注：LR指定了左右排序方式。<br>可以看到，节点的label属性支持类似于HTML语言中的TABLE形式的定义，通过行列的数目来定义节点的形状，从而使得节点的组成更加灵活。</p>
+</blockquote>
+<h2 id="软件模块组成图"><a href="#软件模块组成图" class="headerlink" title="软件模块组成图"></a>软件模块组成图</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">digraph idp_modules&#123;</span><br><span class="line"> </span><br><span class="line">  rankdir = TB;</span><br><span class="line">  fontname = &quot;Microsoft YaHei&quot;;</span><br><span class="line">  fontsize = 12;</span><br><span class="line"> </span><br><span class="line">  node [ fontname = &quot;Microsoft YaHei&quot;, fontsize = 12, shape = &quot;record&quot; ];</span><br><span class="line">  edge [ fontname = &quot;Microsoft YaHei&quot;, fontsize = 12 ];</span><br><span class="line"> </span><br><span class="line">      subgraph cluster_sl&#123;</span><br><span class="line">          label=&quot;IDP支持层&quot;;</span><br><span class="line">          bgcolor=&quot;mintcream&quot;;</span><br><span class="line">          node [shape=&quot;Mrecord&quot;, color=&quot;skyblue&quot;, style=&quot;filled&quot;];</span><br><span class="line">          network_mgr [label=&quot;网络管理器&quot;];</span><br><span class="line">          log_mgr [label=&quot;日志管理器&quot;];</span><br><span class="line">          module_mgr [label=&quot;模块管理器&quot;];</span><br><span class="line">          conf_mgr [label=&quot;配置管理器&quot;];</span><br><span class="line">          db_mgr [label=&quot;数据库管理器&quot;];</span><br><span class="line">      &#125;;</span><br><span class="line"> </span><br><span class="line">      subgraph cluster_md&#123;</span><br><span class="line">          label=&quot;可插拔模块集&quot;;</span><br><span class="line">          bgcolor=&quot;lightcyan&quot;;</span><br><span class="line">          node [color=&quot;chartreuse2&quot;, style=&quot;filled&quot;];</span><br><span class="line">          mod_dev [label=&quot;开发支持模块&quot;];</span><br><span class="line">          mod_dm [label=&quot;数据建模模块&quot;];</span><br><span class="line">          mod_dp [label=&quot;部署发布模块&quot;];</span><br><span class="line">      &#125;;</span><br><span class="line"> </span><br><span class="line">  mod_dp -&gt; mod_dev [label=&quot;依赖...&quot;];</span><br><span class="line">  mod_dp -&gt; mod_dm [label=&quot;依赖...&quot;];</span><br><span class="line">  mod_dp -&gt; module_mgr [label=&quot;安装...&quot;, color=&quot;yellowgreen&quot;, arrowhead=&quot;none&quot;];</span><br><span class="line">  mod_dev -&gt; mod_dm [label=&quot;依赖...&quot;];</span><br><span class="line">  mod_dev -&gt; module_mgr [label=&quot;安装...&quot;, color=&quot;yellowgreen&quot;, arrowhead=&quot;none&quot;];</span><br><span class="line">  mod_dm -&gt; module_mgr [label=&quot;安装...&quot;, color=&quot;yellowgreen&quot;, arrowhead=&quot;none&quot;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/1124873-ce3748fba8814270.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<h2 id="状态图"><a href="#状态图" class="headerlink" title="状态图"></a>状态图</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">digraph automata_0 &#123;</span><br><span class="line">  size = &quot;8.5, 11&quot;;</span><br><span class="line">  fontname = &quot;Microsoft YaHei&quot;;</span><br><span class="line">  fontsize = 10;</span><br><span class="line"> </span><br><span class="line">  node [shape = circle, fontname = &quot;Microsoft YaHei&quot;, fontsize = 10];</span><br><span class="line">  edge [fontname = &quot;Microsoft YaHei&quot;, fontsize = 10];</span><br><span class="line"> </span><br><span class="line">  0 [ style = filled, color=lightgrey ];</span><br><span class="line">  2 [ shape = doublecircle ];</span><br><span class="line"> </span><br><span class="line">  0 -&gt; 2 [ label = &quot;a &quot; ];</span><br><span class="line">  0 -&gt; 1 [ label = &quot;other &quot; ];</span><br><span class="line">  1 -&gt; 2 [ label = &quot;a &quot; ];</span><br><span class="line">  1 -&gt; 1 [ label = &quot;other &quot; ];</span><br><span class="line">  2 -&gt; 2 [ label = &quot;a &quot; ];</span><br><span class="line">  2 -&gt; 1 [ label = &quot;other &quot; ];</span><br><span class="line"> </span><br><span class="line">  &quot;Machine: a&quot; [ shape = plaintext ];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/1124873-f023764884cfcbe6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">digraph finite_state_machine &#123;</span><br><span class="line">  rankdir = LR;</span><br><span class="line">  size = &quot;8,5&quot;</span><br><span class="line"> </span><br><span class="line">  node [shape = doublecircle];</span><br><span class="line"> </span><br><span class="line">  LR_0 LR_3 LR_4 LR_8;</span><br><span class="line"> </span><br><span class="line">  node [shape = circle];</span><br><span class="line"> </span><br><span class="line">  LR_0 -&gt; LR_2 [ label = &quot;SS(B)&quot; ];</span><br><span class="line">  LR_0 -&gt; LR_1 [ label = &quot;SS(S)&quot; ];</span><br><span class="line">  LR_1 -&gt; LR_3 [ label = &quot;S($end)&quot; ];</span><br><span class="line">  LR_2 -&gt; LR_6 [ label = &quot;SS(b)&quot; ];</span><br><span class="line">  LR_2 -&gt; LR_5 [ label = &quot;SS(a)&quot; ];</span><br><span class="line">  LR_2 -&gt; LR_4 [ label = &quot;S(A)&quot; ];</span><br><span class="line">  LR_5 -&gt; LR_7 [ label = &quot;S(b)&quot; ];</span><br><span class="line">  LR_5 -&gt; LR_5 [ label = &quot;S(a)&quot; ];</span><br><span class="line">  LR_6 -&gt; LR_6 [ label = &quot;S(b)&quot; ];</span><br><span class="line">  LR_6 -&gt; LR_5 [ label = &quot;S(a)&quot; ];</span><br><span class="line">  LR_7 -&gt; LR_8 [ label = &quot;S(b)&quot; ];</span><br><span class="line">  LR_7 -&gt; LR_5 [ label = &quot;S(a)&quot; ];</span><br><span class="line">  LR_8 -&gt; LR_6 [ label = &quot;S(b)&quot; ];</span><br><span class="line">  LR_8 -&gt; LR_5 [ label = &quot;S(a)&quot; ];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/1124873-3fc1638d6d7cb3b7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<h2 id="模块的生命周期图"><a href="#模块的生命周期图" class="headerlink" title="模块的生命周期图"></a>模块的生命周期图</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">digraph module_lc&#123;</span><br><span class="line">  rankdir=TB;</span><br><span class="line">  fontname = &quot;Microsoft YaHei&quot;;</span><br><span class="line">  fontsize = 12;</span><br><span class="line"> </span><br><span class="line">  node [fontname = &quot;Microsoft YaHei&quot;, fontsize = 12, shape = &quot;Mrecord&quot;, color=&quot;skyblue&quot;, style=&quot;filled&quot;];</span><br><span class="line">  edge [fontname = &quot;Microsoft YaHei&quot;, fontsize = 12, color=&quot;darkgreen&quot; ];</span><br><span class="line"> </span><br><span class="line">  installed [label=&quot;已安装状态&quot;];</span><br><span class="line">  resolved [label=&quot;已就绪状态&quot;];</span><br><span class="line">  uninstalled [label=&quot;已卸载状态&quot;];</span><br><span class="line">  starting [label=&quot;正在启动&quot;];</span><br><span class="line">  active [label=&quot;已激活(运行)状态&quot;];</span><br><span class="line">  stopping [label=&quot;正在停止&quot;];</span><br><span class="line">  start [label=&quot;&quot;, shape=&quot;circle&quot;, width=0.5, fixedsize=true, style=&quot;filled&quot;, color=&quot;black&quot;];</span><br><span class="line"> </span><br><span class="line">  start -&gt; installed [label=&quot;安装&quot;];</span><br><span class="line">  installed -&gt; uninstalled [label=&quot;卸载&quot;];</span><br><span class="line">  installed -&gt; resolved [label=&quot;准备&quot;];</span><br><span class="line">  installed -&gt; installed [label=&quot;更新&quot;];</span><br><span class="line">  resolved -&gt; installed [label=&quot;更新&quot;];</span><br><span class="line">  resolved -&gt; uninstalled [label=&quot;卸载&quot;];</span><br><span class="line">  resolved -&gt; starting [label=&quot;启动&quot;];</span><br><span class="line">  starting -&gt; active [label=&quot;&quot;];</span><br><span class="line">  active -&gt; stopping [label=&quot;停止&quot;];</span><br><span class="line">  stopping -&gt; resolved [label=&quot;&quot;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/1124873-43070dec615582d5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<h2 id="简单的抽象语法树"><a href="#简单的抽象语法树" class="headerlink" title="简单的抽象语法树"></a>简单的抽象语法树</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">digraph ast&#123;</span><br><span class="line">  fontname = &quot;Microsoft YaHei&quot;;</span><br><span class="line">  fontsize = 10;</span><br><span class="line"> </span><br><span class="line">  node [shape = circle, fontname = &quot;Microsoft YaHei&quot;, fontsize = 10];</span><br><span class="line">  edge [fontname = &quot;Microsoft YaHei&quot;, fontsize = 10];</span><br><span class="line">  node [shape=&quot;plaintext&quot;];</span><br><span class="line"> </span><br><span class="line">  mul [label=&quot;mul(*)&quot;];</span><br><span class="line">  add [label=&quot;add(+)&quot;];</span><br><span class="line"> </span><br><span class="line">  add -&gt; 3</span><br><span class="line">  add -&gt; 4;</span><br><span class="line">  mul -&gt; add;</span><br><span class="line">  mul -&gt; 5;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/1124873-b33962a8c9695711.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<h2 id="简单的UML类图"><a href="#简单的UML类图" class="headerlink" title="简单的UML类图"></a>简单的UML类图</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">digraph G&#123;</span><br><span class="line"> </span><br><span class="line">  fontname = &quot;Courier New&quot;</span><br><span class="line">  fontsize = 10</span><br><span class="line"> </span><br><span class="line">  node [ fontname = &quot;Courier New&quot;, fontsize = 10, shape = &quot;record&quot; ];</span><br><span class="line">  edge [ fontname = &quot;Courier New&quot;, fontsize = 10 ];</span><br><span class="line"> </span><br><span class="line">  Animal [ label = &quot;&#123;Animal |+ name : String\\l+ age : int\\l|+ die() : void\\l&#125;&quot; ];</span><br><span class="line"> </span><br><span class="line">      subgraph clusterAnimalImpl&#123;</span><br><span class="line">          bgcolor=&quot;yellow&quot;</span><br><span class="line">          Dog [ label = &quot;&#123;Dog||+ bark() : void\\l&#125;&quot; ];</span><br><span class="line">          Cat [ label = &quot;&#123;Cat||+ meow() : void\\l&#125;&quot; ];</span><br><span class="line">      &#125;;</span><br><span class="line"> </span><br><span class="line">  edge [ arrowhead = &quot;empty&quot; ];</span><br><span class="line"> </span><br><span class="line">  Dog-&gt;Animal;</span><br><span class="line">  Cat-&gt;Animal;</span><br><span class="line">  Dog-&gt;Cat [arrowhead=&quot;none&quot;, label=&quot;0..*&quot;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/1124873-b0748577409021da.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<h2 id="时序图"><a href="#时序图" class="headerlink" title="时序图"></a>时序图</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">digraph G &#123;</span><br><span class="line">    rankdir=&quot;LR&quot;;</span><br><span class="line">    node[shape=&quot;point&quot;, width=0, height=0];</span><br><span class="line">    edge[arrowhead=&quot;none&quot;, style=&quot;dashed&quot;]</span><br><span class="line"> </span><br><span class="line">    &#123;</span><br><span class="line">        rank=&quot;same&quot;;</span><br><span class="line">        edge[style=&quot;solided&quot;];</span><br><span class="line">        LC[shape=&quot;plaintext&quot;];</span><br><span class="line">        LC -&gt; step00 -&gt; step01 -&gt; step02 -&gt; step03 -&gt; step04 -&gt; step05;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    &#123;</span><br><span class="line">        rank=&quot;same&quot;;</span><br><span class="line">        edge[style=&quot;solided&quot;];</span><br><span class="line">        Agency[shape=&quot;plaintext&quot;];</span><br><span class="line">        Agency -&gt; step10 -&gt; step11 -&gt; step12 -&gt; step13 -&gt; step14 -&gt; step15;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    &#123;</span><br><span class="line">        rank=&quot;same&quot;;</span><br><span class="line">        edge[style=&quot;solided&quot;];</span><br><span class="line">        Agent[shape=&quot;plaintext&quot;];</span><br><span class="line">        Agent -&gt; step20 -&gt; step21 -&gt; step22 -&gt; step23 -&gt; step24 -&gt; step25;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    step00 -&gt; step10 [label=&quot;sends email new custumer&quot;, arrowhead=&quot;normal&quot;];</span><br><span class="line">    step11 -&gt; step01 [label=&quot;declines&quot;, arrowhead=&quot;normal&quot;];</span><br><span class="line">    step12 -&gt; step02 [label=&quot;accepts&quot;, arrowhead=&quot;normal&quot;];</span><br><span class="line">    step13 -&gt; step23 [label=&quot;forward to&quot;, arrowhead=&quot;normal&quot;];</span><br><span class="line">    step24 -&gt; step14;</span><br><span class="line">    step14 -&gt; step04 [arrowhead=&quot;normal&quot;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>rankdir=”LR”表示，布局从左L到右R。可以看到，在代码中有{}括起来的部分。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    rank=&quot;same&quot;;</span><br><span class="line">    edge[style=&quot;solided&quot;];</span><br><span class="line">    Agency[shape=&quot;plaintext&quot;];</span><br><span class="line">    Agency -&gt; step10 -&gt; step11 -&gt; step12 -&gt; step13 -&gt; step14 -&gt; step15;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>每一个rank=”same”的block中的所有节点都会在同一条线上。我们设置了所有的线为虚线，但是在该block中，将线改为solided。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1124873-a8843a2abc096985.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>如果你追求高效的开发速度，并希望快速的将自己的想法画出来，那么graphviz是一个很不错的选择。<br>graphviz的强项在于自动布局，当图中的顶点和边的数目变得很多的时候，才能很好的体会这一特性的好处。</p>
+<p>最后，提供Graphviz<a href="http://www.graphviz.org/Download_windows.php" target="_blank" rel="noopener">下载地址</a>。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="无 wechat" style="width: 200px; max-width: 100%;">
+    <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>欢迎打赏</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="无 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="无 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/02/02/2016/2016-2-2-读：如何搭建一个属于自己的直播平台/" rel="next" title="如何搭建一个属于自己的直播平台">
+                <i class="fa fa-chevron-left"></i> 如何搭建一个属于自己的直播平台
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/25/2016/2016-4-25-读：软件模块的3项职责/" rel="prev" title="读：软件模块的3项职责">
+                读：软件模块的3项职责 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">无</p>
+              <p class="site-description motion-element" itemprop="description">一些文档</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/bxh7425014" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/yiyixiaozhi" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-blind"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/u/1935290765" target="_blank" title="微博">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>微博</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-globe"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://macshuo.com/" title="MacTalk" target="_blank">MacTalk</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://dbanotes.net/" title="闲思录" target="_blank">闲思录</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Graphviz介绍"><span class="nav-number">1.</span> <span class="nav-text">Graphviz介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sublime-Text-3-集成Graphviz方法"><span class="nav-number">2.</span> <span class="nav-text">Sublime Text 3 集成Graphviz方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用graphviz绘制流程图"><span class="nav-number">3.</span> <span class="nav-text">使用graphviz绘制流程图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础知识"><span class="nav-number">3.1.</span> <span class="nav-text">基础知识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一个graphviz图"><span class="nav-number">3.2.</span> <span class="nav-text">第一个graphviz图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义顶点和边的样式"><span class="nav-number">3.3.</span> <span class="nav-text">定义顶点和边的样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进一步修改顶点和边样式"><span class="nav-number">3.4.</span> <span class="nav-text">进一步修改顶点和边样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#子图的绘制"><span class="nav-number">3.5.</span> <span class="nav-text">子图的绘制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据结构的可视化"><span class="nav-number">3.6.</span> <span class="nav-text">数据结构的可视化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一个hash表的数据结构"><span class="nav-number">3.6.1.</span> <span class="nav-text">一个hash表的数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hash表的实例"><span class="nav-number">3.6.2.</span> <span class="nav-text">hash表的实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软件模块组成图"><span class="nav-number">3.7.</span> <span class="nav-text">软件模块组成图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#状态图"><span class="nav-number">3.8.</span> <span class="nav-text">状态图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块的生命周期图"><span class="nav-number">3.9.</span> <span class="nav-text">模块的生命周期图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单的抽象语法树"><span class="nav-number">3.10.</span> <span class="nav-text">简单的抽象语法树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单的UML类图"><span class="nav-number">3.11.</span> <span class="nav-text">简单的UML类图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时序图"><span class="nav-number">3.12.</span> <span class="nav-text">时序图</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">无</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>

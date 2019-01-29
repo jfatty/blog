@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="无">
+<meta property="og:type" content="article">
+<meta property="og:title" content="读：自定义LyricView实现歌词显示控件">
+<meta property="og:url" content="http://bxh7425014.github.io/blog/2016/09/02/2016/2016-9-2-读：自定义LyricView实现歌词显示控件/index.html">
+<meta property="og:site_name" content="一一小知">
+<meta property="og:description" content="无">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1124873-e5117c3d046ecf39.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1124873-35761fd33ee31266.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1124873-58fc721f947ec79a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1124873-4bc6529765d6c09a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1124873-b3bc2e49587ab941.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1124873-7f76f6a69874a48a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1124873-2eae3855575284d1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-01-29T10:45:22.848Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="读：自定义LyricView实现歌词显示控件">
+<meta name="twitter:description" content="无">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1124873-e5117c3d046ecf39.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://bxh7425014.github.io/blog/2016/09/02/2016/2016-9-2-读：自定义LyricView实现歌词显示控件/">
+
+
+
+
+
+  <title>读：自定义LyricView实现歌词显示控件 | 一一小知</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一一小知</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">小知Blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bxh7425014.github.io/blog/2016/09/02/2016/2016-9-2-读：自定义LyricView实现歌词显示控件/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="无">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一一小知">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">读：自定义LyricView实现歌词显示控件</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-02T00:00:00+08:00">
+                2016-09-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  无
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="http://mp.weixin.qq.com/s?__biz=MzA5MzI3NjE2MA==&amp;mid=2650236950&amp;idx=1&amp;sn=d51e6420df7f7533bc81cfe98541c3c0&amp;scene=1&amp;srcid=0902EjpPrGAyIOBJAIOCNg11#rd" target="_blank" rel="noopener">自定义LyricView实现歌词显示控件</a> | <a href="https://github.com/bxh7425014/LyricViewDemo" target="_blank" rel="noopener">源码地址</a> </p>
+<blockquote>
+<p>注：原文的代码阅读和拷贝起来不太方便，我已经摘录出来。</p>
+</blockquote>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>通过自定义View，实现的进阶版LyricView ，能够实现歌词滑动查看，当前播放位置高亮显示，滑动到指定位置并播放等等，大致和网易云音乐的歌词显示效果一样。</p>
+<h1 id="歌词文件的组成"><a href="#歌词文件的组成" class="headerlink" title="歌词文件的组成"></a>歌词文件的组成</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[ti:一个人的北京]</span><br><span class="line">[ar:好妹妹乐队]</span><br><span class="line">[al:南北]</span><br><span class="line">[by:]</span><br><span class="line">[offset:0]</span><br><span class="line">[00:00.10]一个人的北京 - 好妹妹乐队</span><br><span class="line">[00:00.20]词：秦昊</span><br><span class="line">[00:00.30]曲：秦昊</span><br><span class="line">[00:00.40]</span><br><span class="line">[00:30.16]你有多久没有看到 满天的繁星</span><br><span class="line">[00:37.34]城市夜晚虚伪的光明 遮住你的眼睛</span><br><span class="line">......</span><br><span class="line">[04:48.87]离开了这里 在晴朗的天气</span><br><span class="line">[04:55.08]</span><br><span class="line">[04:56.27]让我拥抱你 在晴朗的天气</span><br></pre></td></tr></table></figure>
+<p>歌词文件（*.lrc）都是以一个标准来进行制作的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[ti:  标题</span><br><span class="line">[ar:  歌手</span><br><span class="line">[al:  专辑</span><br><span class="line">[by: 制作</span><br><span class="line">[offset: 时间偏移量</span><br><span class="line">[mm:ss.ms] 歌词信息:由 开始时间（分：秒.毫秒）和 歌词内容 两部分组成</span><br></pre></td></tr></table></figure></p>
+<h1 id="解析歌词文件"><a href="#解析歌词文件" class="headerlink" title="解析歌词文件"></a>解析歌词文件</h1><p>首先获取*.lrc歌词文件的二进制流 InputStream，再又转换成字符流（注意：转化成字符流的时候需要选择编码，比如QQ音乐的歌词文件需要用”GBK”解码）。</p>
+<ul>
+<li>准备两个类主要用于歌词解析结果的缓存：LyricInfo和 LineInfo（）：</li>
+</ul>
+<p>LyricInfo 歌词信息：包含标题、歌手、专辑等等<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class LyricInfo &#123;</span><br><span class="line">    List&lt;LineInfo&gt; song_lines; </span><br><span class="line">    String song_artist;//歌手</span><br><span class="line">    String song_title;//标题</span><br><span class="line">    String song_album;//专辑</span><br><span class="line">    long song_offset;//偏移量</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>LineInfo 歌词行信息：包含行开始时间和歌词行内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class LineInfo &#123;</span><br><span class="line">    String content;//歌词内容</span><br><span class="line">    long start;//开始时间</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>解析歌词文件源码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 初始化歌词信息</span><br><span class="line"> * @param inputStream  歌词文件的流信息</span><br><span class="line"> * */</span><br><span class="line">private void setupLyricResource(InputStream inputStream, String charsetName) &#123;</span><br><span class="line">    if(inputStream != null) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            LyricInfo lyricInfo = new LyricInfo();</span><br><span class="line">            lyricInfo.song_lines = new ArrayList&lt;&gt;();</span><br><span class="line">            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, charsetName);</span><br><span class="line">            BufferedReader reader = new BufferedReader(inputStreamReader);</span><br><span class="line">            String line = null;</span><br><span class="line">            while((line = reader.readLine()) != null) &#123;</span><br><span class="line">                analyzeLyric(lyricInfo, line);</span><br><span class="line">            &#125;</span><br><span class="line">            reader.close();</span><br><span class="line">            inputStream.close();</span><br><span class="line">            inputStreamReader.close();</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        // 暂无歌词</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 逐行解析歌词内容</span><br><span class="line"> * */</span><br><span class="line">private void analyzeLyric(LyricInfo lyricInfo, String line) &#123;</span><br><span class="line">    int index = line.lastIndexOf(&quot;]&quot;);</span><br><span class="line">    if(line != null &amp;&amp; line.startsWith(&quot;[offset:&quot;)) &#123;</span><br><span class="line">        // 时间偏移量</span><br><span class="line">        String string = line.substring(8, index).trim();</span><br><span class="line">        lyricInfo.song_offset = Long.parseLong(string);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    if(line != null &amp;&amp; line.startsWith(&quot;[ti:&quot;)) &#123;</span><br><span class="line">        // title 标题</span><br><span class="line">        String string = line.substring(4, index).trim();</span><br><span class="line">        lyricInfo.song_title = string;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    if(line != null &amp;&amp; line.startsWith(&quot;[ar:&quot;)) &#123;</span><br><span class="line">        // artist 作者</span><br><span class="line">        String string = line.substring(4, index).trim();</span><br><span class="line">        lyricInfo.song_artist = string;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    if(line != null &amp;&amp; line.startsWith(&quot;[al:&quot;)) &#123;</span><br><span class="line">        // album 所属专辑</span><br><span class="line">        String string = line.substring(4, index).trim();</span><br><span class="line">        lyricInfo.song_album = string;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    if(line != null &amp;&amp; line.startsWith(&quot;[by:&quot;)) &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    if(line != null &amp;&amp; index == 9 &amp;&amp; line.trim().length() &gt; 10) &#123;</span><br><span class="line">        // 歌词内容</span><br><span class="line">        LineInfo lineInfo = new LineInfo();</span><br><span class="line">        lineInfo.content = line.substring(10, line.length());</span><br><span class="line">        lineInfo.start = measureStartTimeMillis(line.substring(0, 10));</span><br><span class="line">        lyricInfo.song_lines.add(lineInfo);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 从字符串中获得时间值</span><br><span class="line"> * */</span><br><span class="line">private long measureStartTimeMillis(String str) &#123;</span><br><span class="line">    long minute = Long.parseLong(str.substring(1, 3));</span><br><span class="line">    long second = Long.parseLong(str.substring(4, 6));</span><br><span class="line">    long millisecond = Long.parseLong(str.substring(7, 9));</span><br><span class="line">    return millisecond + second * 1000 + minute * 60 * 1000;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="验证解析效果"><a href="#验证解析效果" class="headerlink" title="验证解析效果"></a>验证解析效果</h1><p>完成歌词解析，接下来就是验证歌词解析的一个实际效果的时候了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">File file = new File(Constant.lyricPath + &quot;一个人的北京 - 好妹妹乐队.lrc&quot;);</span><br><span class="line">if (file != null &amp;&amp; file.exists()) &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        setupLyricResource(new FileInputStream(file), &quot;GBK&quot;);</span><br><span class="line">        StringBuffer stringBuffer = new StringBuffer();</span><br><span class="line">        if(lyricInfo != null &amp;&amp; lyricInfo.song_lines != null) &#123;</span><br><span class="line">            int size = lyricInfo.song_lines.size();</span><br><span class="line">            for (int i = 0; i &lt; size; i ++) &#123;</span><br><span class="line">                stringBuffer.append(lyricInfo.song_lines.get(i).content + &quot;\n&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">            text.setText(stringBuffer.toString());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; catch (FileNotFoundException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>效果图：<br><img src="http://upload-images.jianshu.io/upload_images/1124873-e5117c3d046ecf39.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>就这样，一个简单的歌词显示功能也就实现了。 但是，如何才能够让自己写的音乐播放器在歌词显示模块能够显得高大上，并且能够像很多当前应用市场上流行的音乐播放器那样，实现当前播放高亮显示、歌词回弹效果、歌词淡入淡出效果以及滑动歌词快速播放等功能呢？ 请接着往下读…..</p>
+<p>上面有提及到在早些前我有用 ScrollView 嵌套 TextView 的方式实现过自定义 LyricView，但是，由于体验效果和功能拓展上的不足，我并没有公开分享。既然通过 ScrollView 嵌套 TextView 的方式 不能满足 我们的设计需求，那是不是能够通过 自定义View 的方式实现 LyricView？既有如 TextView 那样的 LineHeigh(行高)、LineCount(总行数) 的概念，也有如 ScrollView 那样的 ScrollY(Y方向的偏移量) 的概念。那是必须的，说干就干。</p>
+<h1 id="LyricView实现"><a href="#LyricView实现" class="headerlink" title="LyricView实现"></a>LyricView实现</h1><p>解析*.lrc歌词文件，生成歌词集合列表，获得行总数</p>
+<p>上面我已经讲过解析歌词了，而在 LyricView 中，我们需要做的是将逐行解析出来的歌词信息添加到 集合mLyricInfo 中，而 总行数mLineCount 也就等于 List集合 的大小 mLineCount = mLyricInfo.song_lines.size()。</p>
+<p>计算歌词单行高度，获得歌词绘制区域总高度</p>
+<p>写过 自定义View 的朋友应该都会知道，在 自定义View 中如果涉及文字的绘制，为了能够精准的绘制文字的位置，我们需要获取需要绘制的文字的矩形区域，通过画笔 Paint 的 getTextBounds(String text, int start, int end, Rect bounds)方法 则可以帮助我们轻松获得一个需要绘制文字的一个矩形。</p>
+<p>当然，绘制文字矩形区域的大小还与文字的大小相关，我们还可以通过画笔 Paint 的 setTextSize(float textSize)方法 设置绘制文字大小，也就是常说的 TextSize。</p>
+<p>在 LyricView 中，行高可不仅仅就只是文字矩形区域的高度，行高还包括两行之间的行间距，如下图所示。既然歌词总行数和歌词单行高度我们都已取得，那么获取歌词绘制区域的总高度也就so easy了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 计算行高度</span><br><span class="line"> * */</span><br><span class="line">private void measureLineHeight() &#123;</span><br><span class="line">    Rect lineBound = new Rect();</span><br><span class="line">    mTextPaint.getTextBounds(mDefaultHint, 0, mDefaultHint.length(), lineBound);</span><br><span class="line">    mLineHeight = lineBound.height() + mLineSpace;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>计算行高度</p>
+<p>定义 scrollY，并通过当前歌曲播放进度的时间戳计算 scrollY</p>
+<p>既然 LyricView 能够实现滑动功能，那么引入 scrollY值 记录滑动偏移量，并控制视图绘制效果也就顺理成章。 需要明确一点，当偏移量 scrollY 的值为零的时候，歌词的首行将显示在整个 LyricView 的正中间 。</p>
+<p>我们知道每一句歌词中都包含着开始时间，而我们也就可以通过当前歌曲播放进度匹配当前播放的行数 mCurrentPlayLine，并通过当前播放所在行，计算偏移量 scrollY 的值，控制歌词播放滚动和当前播放位置的高亮显示。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">for(int i = 0, size = mLineCount; i &lt; size; i ++) &#123;</span><br><span class="line">    LineInfo lineInfo = mLyricInfo.song_lines.get(i);</span><br><span class="line">    if(lineInfo != null &amp;&amp; lineInfo.start &gt; time) &#123;</span><br><span class="line">        position = i;</span><br><span class="line">        break;</span><br><span class="line">    &#125;</span><br><span class="line">    if(i == mLineCount - 1) &#123;</span><br><span class="line">        position = mLineCount;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>匹配当前播放行数 mCurrentPlayLine<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Input current showing line to measure the view&apos;s current scroll Y</span><br><span class="line"> * @param line  当前指定行号</span><br><span class="line"> * */</span><br><span class="line">private float measureCurrentScrollY(int line) &#123;</span><br><span class="line">    return (line - 1) * mLineHeight;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>计算偏移量scrollY</p>
+<p>理论基础已经实现，初步尝试绘图 onDraw：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">for(int i = 0, size = mLineCount; i &lt; size; i ++) &#123;</span><br><span class="line">    float x = getMeasuredWidth() * 0.5f;</span><br><span class="line">    float y = getMeasuredHeight() * 0.5f + (i + 0.5f) * mLineHeight - 6 - mLineSpace * 0.5f - mScrollY;</span><br><span class="line">    if(y + mLineHeight * 0.5f &lt; 0) &#123;</span><br><span class="line">        continue;</span><br><span class="line">    &#125;</span><br><span class="line">    if(y - mLineHeight * 0.5f &gt; getMeasuredHeight()) &#123;</span><br><span class="line">        break;</span><br><span class="line">    &#125;</span><br><span class="line">    if(i == mCurrentPlayLine - 1) &#123;</span><br><span class="line">        mTextPaint.setColor(mHighLightColor);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        if(mIndicatorShow &amp;&amp; i == mCurrentShowLine - 1) &#123;</span><br><span class="line">            mTextPaint.setColor(mCurrentShowColor);</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            mTextPaint.setColor(mDefaultColor);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    if(y &gt; getMeasuredHeight() - mShaderWidth || y &lt; mShaderWidth) &#123;</span><br><span class="line">        if(y &lt; mShaderWidth) &#123;</span><br><span class="line">            mTextPaint.setAlpha(26 + (int) (23000.0f * y / mShaderWidth * 0.01f));</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            mTextPaint.setAlpha(26 + (int) (23000.0f * (getMeasuredHeight() - y) / mShaderWidth * 0.01f));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        mTextPaint.setAlpha(255);</span><br><span class="line">    &#125;</span><br><span class="line">    canvas.drawText(mLyricInfo.song_lines.get(i).content, x, y, mTextPaint);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Bingo ! 歌词确实能够在屏幕上绘制出来，细心的朋友也许会发现其中的几个特别的地方，分别是当前播放位置高亮显示和歌词淡入淡出效果实现的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//实现当前位置高亮显示</span><br><span class="line">if(i == mCurrentPlayLine - 1) &#123;</span><br><span class="line">    mTextPaint.setColor(mHighLightColor);</span><br><span class="line">&#125;</span><br><span class="line">//歌词淡入淡出效果实现</span><br><span class="line">if(y &gt; getMeasuredHeight() - mShaderWidth || y &lt; mShaderWidth) &#123;</span><br><span class="line">    if(y &lt; mShaderWidth) &#123;</span><br><span class="line">        mTextPaint.setAlpha(26 + (int) (23000.0f * y / mShaderWidth * 0.01f));</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        mTextPaint.setAlpha(26 + (int) (23000.0f * (getMeasuredHeight() - y) / mShaderWidth * 0.01f));</span><br><span class="line">    &#125;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    mTextPaint.setAlpha(255);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是，仅仅只是实现显示功能，并且超出范围的歌词内容还不能通过滑动来查看。哈哈~ 别着急啊，骚年，坐下来和我凉茶，听我细细道来。</p>
+<p>重写 onTouchEvent，实现歌词滑动查看，并实现 overScroll 回弹效果</p>
+<p>仅仅需要实现滑动视图的功能的话，说实话，非常简单，只需要记录 ACTION_DOWN 时的 y值，并比较 ACTION_MOVE 过程中的 y值 计算两者的差值，生成新的偏移量 scrollY，再刷新视图，就可以搞定 !</p>
+<p>要是就这么简简单单了事的话，怎么也不符合我个人对完美设计的要求。要是我们无限滑动的话，整个歌词内容区域就会滑动出我们的可视区域，也就是常说的 overScroll，如果不加以限制将会是一种非常差的用户体验。</p>
+<p>当然，不同的开发对解决这个问题有不同的方法，有些播放器的歌词显示控件，当滑动事件出现 overScroll 时，将不再视图继续滑动。当然，也有当滑动事件出现 overScroll 时，视图依旧能够继续滑动，但与正常滑动时有所区别，这个时候的滑动会有一种 阻尼效果，也就是实际滑动距离和视图的滚动距离并不相等，而且随着 overScroll 的值越大，阻力越大，滑动越艰难，并在用户手指离开屏幕后回到 overScrol l的值为零的位置。当然，我本人更喜欢后者的用户体验，为了实现这个功能，那么就必须要在重写 onTouchEvent 的方法中”做点手脚”了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 手势移动执行事件</span><br><span class="line"> * @param event</span><br><span class="line"> * */</span><br><span class="line">private void actionMove(MotionEvent event) &#123;</span><br><span class="line">    if(scrollable()) &#123;</span><br><span class="line">        final VelocityTracker tracker = mVelocityTracker;</span><br><span class="line">        tracker.computeCurrentVelocity(1000, maximumFlingVelocity);</span><br><span class="line">        float scrollY = mLastScrollY + mDownY - event.getY();   // 102  -2  58  42</span><br><span class="line">        float value01 = scrollY - (mLineCount * mLineHeight * 0.5f);   // 52  -52  8  -8</span><br><span class="line">        float value02 = ((Math.abs(value01) - (mLineCount * mLineHeight * 0.5f)));   // 2  2  -42  -42</span><br><span class="line">        mScrollY = value02 &gt; 0 ? scrollY - (measureDampingDistance(value02) * value01 / Math.abs(value01)) : scrollY;   //   value01 / Math.abs(value01)  控制滑动方向</span><br><span class="line">        mVelocity = tracker.getYVelocity();</span><br><span class="line">        measureCurrentLine();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>ACTION_MOVE<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 计算阻尼效果的大小</span><br><span class="line"> * */</span><br><span class="line">private final int mMaxDampingDistance = 360;</span><br><span class="line">private float measureDampingDistance(float value02) &#123;</span><br><span class="line">    return value02 &gt; mMaxDampingDistance ? (mMaxDampingDistance * 0.6f + (value02 - mMaxDampingDistance) * 0.72f) : value02 * 0.6f;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>阻尼大小计算</p>
+<p>通过我一次一次对代码的细化，只要这么简单的两个方法，就完成了滑动时偏移量 scrollY 的计算，包括 overScroll 和 非overScroll，是的，只要这么两个方法。</p>
+<p>到了这一步，歌词的显示、滑动查看都已经完成。但这还没完，我是不是还说过我的 LyricView 能够实现像网易云音乐歌词显示控件那样的指示器效果，哈哈哈 ~ 对于我这个完美主义者而言，这个功能必须实现。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1124873-35761fd33ee31266.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>歌词指示器效果图</p>
+<p>实现歌词指示器效果，”屌丝”蜕变”高富帅”</p>
+<p>其实，指示器效果实现起来也不是很难，其实指示器左侧的按钮完全可以用绘制 Bitmap 的方式其实现，但是，考虑到 LyricView 的灵活性，同时，我们程序猿不都是能够用代码绘制的决不在工程中添加图片的嘛 ！更何况就一个简单的播放按钮，随便画画，哈哈 ~ 至于，右侧的时间指示，则是通过当前偏移量 scrollY 的值计算得来的当前控件正中间位置显示歌词的开始时间。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 绘制左侧的播放按钮</span><br><span class="line"> * @param canvas</span><br><span class="line"> * */</span><br><span class="line">private void drawPlayer(Canvas canvas) &#123;</span><br><span class="line">    mBtnBound = new Rect(mDefaultMargin, (int) (getMeasuredHeight() * 0.5f - mBtnWidth * 0.5f), mBtnWidth + mDefaultMargin, (int) (getMeasuredHeight() * 0.5f + mBtnWidth * 0.5f));</span><br><span class="line"></span><br><span class="line">    Path path = new Path();</span><br><span class="line">    float radio = mBtnBound.width() * 0.3f;</span><br><span class="line">    float value = (float) Math.sqrt(Math.pow(radio, 2) - Math.pow(radio * 0.5f, 2));</span><br><span class="line">    path.moveTo(mBtnBound.centerX() - radio * 0.5f, mBtnBound.centerY() - value);</span><br><span class="line">    path.lineTo(mBtnBound.centerX() - radio * 0.5f, mBtnBound.centerY() + value);</span><br><span class="line">    path.lineTo(mBtnBound.centerX() + radio, mBtnBound.centerY());</span><br><span class="line">    path.lineTo(mBtnBound.centerX() - radio * 0.5f, mBtnBound.centerY() - value);</span><br><span class="line">    mBtnPaint.setAlpha(128);</span><br><span class="line">    canvas.drawPath(path, mBtnPaint);  // 绘制播放按钮的三角形</span><br><span class="line">    canvas.drawCircle(mBtnBound.centerX(), mBtnBound.centerY(), mBtnBound. width() * 0.48f, mBtnPaint);  // 绘制圆环</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>绘制指示器左侧播放按钮<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 绘制指示器</span><br><span class="line"> * @param canvas</span><br><span class="line"> * */</span><br><span class="line">private void drawIndicator(Canvas canvas) &#123;</span><br><span class="line">    mIndicatorPaint.setColor(mIndicatorColor);</span><br><span class="line">    mIndicatorPaint.setAlpha(128);</span><br><span class="line">    mIndicatorPaint.setStyle(Paint.Style.FILL);</span><br><span class="line">    canvas.drawText(measureCurrentTime(), getMeasuredWidth() - mTimerBound.width(), (getMeasuredHeight() + mTimerBound.height() - 6) * 0.5f, mIndicatorPaint);</span><br><span class="line"></span><br><span class="line">    Path path = new Path();</span><br><span class="line">    mIndicatorPaint.setStrokeWidth(2.0f);</span><br><span class="line">    mIndicatorPaint.setStyle(Paint.Style.STROKE);</span><br><span class="line">    mIndicatorPaint.setPathEffect(new DashPathEffect(new float[]&#123;20, 10&#125;, 0));</span><br><span class="line">    path.moveTo(mPlayable ? mBtnBound.right + 24 : 24 , getMeasuredHeight() * 0.5f);</span><br><span class="line">    path.lineTo(getMeasuredWidth() - mTimerBound.width() - mTimerBound.width() - 36, getMeasuredHeight() * 0.5f);</span><br><span class="line">    canvas.drawPath(path , mIndicatorPaint);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>绘制指示器分割线和时间</p>
+<p>既然设计播放按钮，当然播放按钮就要实现点击事件啊：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 判断当前点击事件是否落在播放按钮触摸区域范围内</span><br><span class="line"> * @param event  触摸事件</span><br><span class="line"> * */</span><br><span class="line">private boolean clickPlayer(MotionEvent event) &#123;</span><br><span class="line">    if(mBtnBound != null &amp;&amp;  mDownX &gt; (mBtnBound.left - mDefaultMargin) &amp;&amp; mDownX &lt; (mBtnBound.right + mDefaultMargin) &amp;&amp; mDownY &gt; (mBtnBound.top - mDefaultMargin) &amp;&amp; mDownY &lt; (mBtnBound.bottom + mDefaultMargin)) &#123;</span><br><span class="line">        float upX = event.getX();   float upY = event.getY();</span><br><span class="line">        return upX &gt; (mBtnBound.left - mDefaultMargin) &amp;&amp; upX &lt; (mBtnBound.right + mDefaultMargin) &amp;&amp; upY &gt; (mBtnBound.top - mDefaultMargin) &amp;&amp; upY &lt; (mBtnBound.bottom + mDefaultMargin);</span><br><span class="line">    &#125;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p> 播放按钮点击位置判断<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">if(mIndicatorShow &amp;&amp; clickPlayer(event)) &#123;</span><br><span class="line">    if(mCurrentShowLine != mCurrentPlayLine) &#123;</span><br><span class="line">        mIndicatorShow = false;</span><br><span class="line">        if(mClickListener != null) &#123;</span><br><span class="line">            mClickListener.onPlayerClicked(</span><br><span class="line">                mLyricInfo.song_lines.get(mCurrentShowLine - 1).start,</span><br><span class="line">                mLyricInfo.song_lines.get(mCurrentShowLine - 1).content);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>到这一步，我们的自定义 LyricView 设计介绍也就告一段落咯 ！ 当然，功能远不止这些，还有 设置字体大小、设置行间距 以及 结合速度追踪器实现滑行效果 等等。所谓”授人以鱼不如授人以渔”，我想要和大家分享的是我的一个设计思路，大家可以根据需求设计不通的功能，因此在这里我也不做过多介绍，对小阿飞的 LyricView 感兴趣的朋友可以去我的gitHub下载研究：<br><a href="https://github.com/WuLiFei/LyricViewDemo" target="_blank" rel="noopener">https://github.com/WuLiFei/LyricViewDemo</a></p>
+<h1 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h1><p><img src="http://upload-images.jianshu.io/upload_images/1124873-58fc721f947ec79a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"><br>overScroll效果展示</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1124873-4bc6529765d6c09a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>字体颜色设置效果展示</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1124873-b3bc2e49587ab941.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"><br>字体大小设置效果展示</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1124873-7f76f6a69874a48a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"><br>行间距设置效果展示</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1124873-2eae3855575284d1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"><br>指示器和播放按钮效果展示</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="无 wechat" style="width: 200px; max-width: 100%;">
+    <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>欢迎打赏</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="无 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="无 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/09/2016/2016-8-9-Android Fix集锦/" rel="next" title="Android Fix集锦">
+                <i class="fa fa-chevron-left"></i> Android Fix集锦
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/09/2016/2016-9-9-读：阿里巴巴店铺的十年技术演变之路/" rel="prev" title="读：阿里巴巴店铺的十年技术演变之路">
+                读：阿里巴巴店铺的十年技术演变之路 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">无</p>
+              <p class="site-description motion-element" itemprop="description">一些文档</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/bxh7425014" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/yiyixiaozhi" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-blind"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/u/1935290765" target="_blank" title="微博">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>微博</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-globe"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://macshuo.com/" title="MacTalk" target="_blank">MacTalk</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://dbanotes.net/" title="闲思录" target="_blank">闲思录</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#歌词文件的组成"><span class="nav-number">2.</span> <span class="nav-text">歌词文件的组成</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解析歌词文件"><span class="nav-number">3.</span> <span class="nav-text">解析歌词文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#验证解析效果"><span class="nav-number">4.</span> <span class="nav-text">验证解析效果</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LyricView实现"><span class="nav-number">5.</span> <span class="nav-text">LyricView实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#效果图"><span class="nav-number">6.</span> <span class="nav-text">效果图</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">无</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>

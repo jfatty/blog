@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="如欲相见，我在各种悲喜交集处，能做的只是长途跋涉的归真返璞。 --诗人，木心">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前后端分离实战：使用JSON方式来登录SpringSecurity">
+<meta property="og:url" content="http://bxh7425014.github.io/blog/2019/01/23/2019/SpringSecurity对JSON登录格式进行响应/index.html">
+<meta property="og:site_name" content="一一小知">
+<meta property="og:description" content="如欲相见，我在各种悲喜交集处，能做的只是长途跋涉的归真返璞。 --诗人，木心">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://images.gitee.com/uploads/images/2019/0123/124132_13fe2c76_438941.png">
+<meta property="og:image" content="https://images.gitee.com/uploads/images/2019/0123/132430_d446b6c2_438941.png">
+<meta property="og:image" content="https://images.gitee.com/uploads/images/2019/0123/132918_23e01d9d_438941.png">
+<meta property="og:updated_time" content="2019-01-29T10:45:22.873Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前后端分离实战：使用JSON方式来登录SpringSecurity">
+<meta name="twitter:description" content="如欲相见，我在各种悲喜交集处，能做的只是长途跋涉的归真返璞。 --诗人，木心">
+<meta name="twitter:image" content="https://images.gitee.com/uploads/images/2019/0123/124132_13fe2c76_438941.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://bxh7425014.github.io/blog/2019/01/23/2019/SpringSecurity对JSON登录格式进行响应/">
+
+
+
+
+
+  <title>前后端分离实战：使用JSON方式来登录SpringSecurity | 一一小知</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一一小知</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">小知Blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bxh7425014.github.io/blog/2019/01/23/2019/SpringSecurity对JSON登录格式进行响应/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="无">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一一小知">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">前后端分离实战：使用JSON方式来登录SpringSecurity</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T00:00:00+08:00">
+                2019-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/工具/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  如欲相见，我在各种悲喜交集处，能做的只是长途跋涉的归真返璞。 --诗人，木心
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>微信公众号：<strong><a href="#jump_1">一一小知</a></strong><br>问题或建议，请公众号留言;</p>
+</blockquote>
+<h1 id="SpringSecurity本身对于Login-Parameter的登录处理"><a href="#SpringSecurity本身对于Login-Parameter的登录处理" class="headerlink" title="SpringSecurity本身对于Login Parameter的登录处理"></a>SpringSecurity本身对于Login Parameter的登录处理</h1><p>本身自带的请求页面是这样的：<br><img src="https://images.gitee.com/uploads/images/2019/0123/124132_13fe2c76_438941.png" alt="登录页面" title="屏幕截图.png"></p>
+<p>点击<code>login</code>按钮之后，requst如下，可以看到<code>Content-Type</code>的值是<code>application/x-www-form-urlencoded</code>，<code>username</code>、<code>password</code>、<code>submit</code>是作为Parameter参数做了请求。</p>
+<p>完整的如下：<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">Request URL: http://localhost:8081/user/login</span><br><span class="line">Request Method: POST</span><br><span class="line">Status Code: 401 </span><br><span class="line">Remote Address: [::1]:8081</span><br><span class="line">Referrer Policy: no-referrer-when-downgrade</span><br><span class="line"><span class="attribute">Cache-Control</span>: no-cache, no-store, max-age=0, must-revalidate</span><br><span class="line"><span class="attribute">Content-Type</span>: application/json;charset=utf-8</span><br><span class="line"><span class="attribute">Date</span>: Wed, 23 Jan 2019 02:12:40 GMT</span><br><span class="line"><span class="attribute">Expires</span>: 0</span><br><span class="line"><span class="attribute">Pragma</span>: no-cache</span><br><span class="line"><span class="attribute">Transfer-Encoding</span>: chunked</span><br><span class="line"><span class="attribute">X-Content-Type-Options</span>: nosniff</span><br><span class="line"><span class="attribute">X-Frame-Options</span>: DENY</span><br><span class="line"><span class="attribute">X-XSS-Protection</span>: 1; mode=block</span><br><span class="line"><span class="attribute">Accept</span>: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8</span><br><span class="line"><span class="attribute">Accept-Encoding</span>: gzip, deflate, br</span><br><span class="line"><span class="attribute">Accept-Language</span>: zh-CN,zh;q=0.9</span><br><span class="line"><span class="attribute">Cache-Control</span>: max-age=0</span><br><span class="line"><span class="attribute">Connection</span>: keep-alive</span><br><span class="line"><span class="attribute">Content-Length</span>: 38</span><br><span class="line"><span class="attribute">Content-Type</span>: application/x-www-form-urlencoded</span><br><span class="line"><span class="attribute">Cookie</span>: JSESSIONID=A977E4AD3F578C5B8FA80BF2DC83C4FA</span><br><span class="line"><span class="attribute">Host</span>: localhost:8081</span><br><span class="line"><span class="attribute">Origin</span>: http://localhost:8081</span><br><span class="line"><span class="attribute">Referer</span>: http://localhost:8081/login</span><br><span class="line"><span class="attribute">Upgrade-Insecure-Requests</span>: 1</span><br><span class="line"><span class="attribute">User-Agent</span>: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36</span><br><span class="line"><span class="attribute">username</span>: bianxh</span><br><span class="line"><span class="attribute">password</span>: </span><br><span class="line"><span class="attribute">submit</span>: Login</span><br></pre></td></tr></table></figure></p>
+<p>对应的<code>username</code>和<code>password</code>的接收和处理在<code>WebSecurityConfigurerAdapter</code>子实例中完成，如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.template.config;</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"><span class="meta">@EnableGlobalMethodSecurity</span>(prePostEnabled = <span class="keyword">true</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebSecurityConfig</span> <span class="keyword">extends</span> <span class="title">WebSecurityConfigurerAdapter</span> </span>&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">configure</span><span class="params">(HttpSecurity http)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        http.authorizeRequests().antMatchers(HttpMethod.OPTIONS).permitAll()</span><br><span class="line">                .withObjectPostProcessor(<span class="keyword">new</span> ObjectPostProcessor&lt;FilterSecurityInterceptor&gt;() &#123;</span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="keyword">public</span> &lt;O extends FilterSecurityInterceptor&gt; <span class="function">O <span class="title">postProcess</span><span class="params">(O o)</span> </span>&#123;</span><br><span class="line">                        o.setSecurityMetadataSource(metadataSource);</span><br><span class="line">                        o.setAccessDecisionManager(urlAccessDecisionManager); <span class="comment">// url拦截</span></span><br><span class="line">                        <span class="keyword">return</span> o;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line">                .and()</span><br><span class="line"><span class="comment">//                .formLogin().loginPage("/login_p").loginProcessingUrl("/login")</span></span><br><span class="line">                <span class="comment">// 定义响应的url</span></span><br><span class="line">                .formLogin().loginProcessingUrl(<span class="string">"/user/login"</span>) </span><br><span class="line">                .usernameParameter(<span class="string">"username"</span>).passwordParameter(<span class="string">"password"</span>)</span><br><span class="line">                .permitAll()</span><br><span class="line">                .and()</span><br><span class="line">                .logout().permitAll()</span><br><span class="line">                .and().csrf().disable()</span><br><span class="line">                .exceptionHandling().accessDeniedHandler(deniedHandler);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在<code>Vue</code>项目配置中模拟这样的请求如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> request <span class="keyword">from</span> <span class="string">'@/utils/request'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">login</span>(<span class="params">username, password</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> request(&#123;</span><br><span class="line">    url: <span class="string">'/user/login'</span>,</span><br><span class="line">    method: <span class="string">'post'</span>,</span><br><span class="line">    params: &#123; username, password &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Request参数如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">Request URL: http://localhost:8080/user/login?username=bryan&amp;password=1984</span><br><span class="line">Request Method: POST</span><br><span class="line">Status Code: 403 Forbidden</span><br><span class="line">Remote Address: 127.0.0.1:8080</span><br><span class="line">Referrer Policy: no-referrer-when-downgrade</span><br><span class="line"><span class="attribute">cache-control</span>: no-cache, no-store, max-age=0, must-revalidate</span><br><span class="line"><span class="attribute">connection</span>: close</span><br><span class="line"><span class="attribute">content-length</span>: 0</span><br><span class="line"><span class="attribute">date</span>: Wed, 23 Jan 2019 05:01:03 GMT</span><br><span class="line"><span class="attribute">expires</span>: 0</span><br><span class="line"><span class="attribute">pragma</span>: no-cache</span><br><span class="line"><span class="attribute">x-content-type-options</span>: nosniff</span><br><span class="line"><span class="attribute">x-frame-options</span>: DENY</span><br><span class="line"><span class="attribute">X-Powered-By</span>: Express</span><br><span class="line"><span class="attribute">x-xss-protection</span>: 1; mode=block</span><br><span class="line"><span class="attribute">Accept</span>: application/json, text/plain, */*</span><br><span class="line"><span class="attribute">Accept-Encoding</span>: gzip, deflate, br</span><br><span class="line"><span class="attribute">Accept-Language</span>: zh-CN,zh;q=0.9</span><br><span class="line"><span class="attribute">Connection</span>: keep-alive</span><br><span class="line"><span class="attribute">Content-Length</span>: 0</span><br><span class="line"><span class="attribute">Cookie</span>: JSESSIONID=DE7E824DB59383D63DA926C5DAA1048E</span><br><span class="line"><span class="attribute">Host</span>: localhost:8080</span><br><span class="line"><span class="attribute">Origin</span>: http://localhost:8080</span><br><span class="line"><span class="attribute">Referer</span>: http://localhost:8080/</span><br><span class="line"><span class="attribute">User-Agent</span>: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36</span><br><span class="line">username=bryan&amp;password=1984</span><br></pre></td></tr></table></figure></p>
+<h2 id="换用JSON方式来登录"><a href="#换用JSON方式来登录" class="headerlink" title="换用JSON方式来登录"></a>换用JSON方式来登录</h2><h2 id="SpringSecurity配置调整"><a href="#SpringSecurity配置调整" class="headerlink" title="SpringSecurity配置调整"></a>SpringSecurity配置调整</h2><blockquote>
+<p>spring security 是基于javax.servlet.Filter的，因此才能在spring mvc（DispatcherServlet基于Servlet）前起作用。</p>
+<ul>
+<li><strong>UsernamePasswordAuthenticationFilter</strong>:实现Filter接口，负责拦截登录处理的url，帐号和密码会在这里获取，然后封装成<code>Authentication</code>交给<code>AuthenticationManager</code>进行认证工作</li>
+<li><strong>Authentication</strong>:贯穿整个认证过程，封装了认证的用户名，密码和权限角色等信息，接口有一个boolean isAuthenticated()方法来决定该<code>Authentication</code>认证成功没;</li>
+<li><strong>AuthenticationManager</strong>:认证管理器，但本身并不做认证工作，只是做个管理者的角色。例如默认实现<code>ProviderManager</code>会持有一个<code>AuthenticationProvider</code>数组，把认证工作交给这些<code>AuthenticationProvider</code>，直到有一个<code>AuthenticationProvider</code>完成了认证工作。</li>
+<li><strong>AuthenticationProvider</strong>:认证提供者，默认实现，也是最常使用的是<code>DaoAuthenticationProvider</code>。我们在配置时一般重写一个<code>UserDetailsService</code>来从数据库获取正确的用户名密码，其实就是配置了<code>DaoAuthenticationProvider</code>的<code>UserDetailsService</code>属性，<code>DaoAuthenticationProvider</code>会做帐号和密码的比对，如果正常就返回给<code>AuthenticationManager</code>一个验证成功的<code>Authentication</code> </li>
+</ul>
+<p>看<code>UsernamePasswordAuthenticationFilter</code>源码里的obtainUsername和obtainPassword方法只是简单地调用request.getParameter方法，因此如果用json发送用户名和密码会导致<code>DaoAuthenticationProvider</code>检查密码时为空，抛出<code>BadCredentialsException</code>。</p>
+</blockquote>
+<h3 id="重写UsernamePasswordAnthenticationFilter"><a href="#重写UsernamePasswordAnthenticationFilter" class="headerlink" title="重写UsernamePasswordAnthenticationFilter"></a>重写UsernamePasswordAnthenticationFilter</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.template.filter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.fasterxml.jackson.databind.ObjectMapper;</span><br><span class="line"><span class="keyword">import</span> com.template.bean.AuthenticationBean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.http.MediaType;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.authentication.UsernamePasswordAuthenticationToken;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.Authentication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.AuthenticationException;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CustomAuthenticationFilter</span> <span class="keyword">extends</span> <span class="title">UsernamePasswordAuthenticationFilter</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Authentication <span class="title">attemptAuthentication</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> AuthenticationException </span>&#123;</span><br><span class="line">        <span class="comment">//attempt Authentication when Content-Type is json</span></span><br><span class="line">        <span class="keyword">if</span>(request.getContentType().equals(MediaType.APPLICATION_JSON_UTF8_VALUE)</span><br><span class="line">                ||request.getContentType().equals(MediaType.APPLICATION_JSON_VALUE))&#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//use jackson to deserialize json</span></span><br><span class="line">            ObjectMapper mapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line">            UsernamePasswordAuthenticationToken authRequest = <span class="keyword">null</span>;</span><br><span class="line">            <span class="keyword">try</span> (InputStream is = request.getInputStream())&#123;</span><br><span class="line">                AuthenticationBean authenticationBean = mapper.readValue(is,AuthenticationBean.class);</span><br><span class="line">                authRequest = <span class="keyword">new</span> UsernamePasswordAuthenticationToken(</span><br><span class="line">                        authenticationBean.getUsername(), authenticationBean.getPassword());</span><br><span class="line">            &#125;<span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">                authRequest = <span class="keyword">new</span> UsernamePasswordAuthenticationToken(</span><br><span class="line">                        <span class="string">""</span>, <span class="string">""</span>);</span><br><span class="line">            &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">                setDetails(request, authRequest);</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">this</span>.getAuthenticationManager().authenticate(authRequest);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//transmit it to UsernamePasswordAuthenticationFilter</span></span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">super</span>.attemptAuthentication(request, response);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="WebSecurityConfigurerAdapter配置"><a href="#WebSecurityConfigurerAdapter配置" class="headerlink" title="WebSecurityConfigurerAdapter配置"></a>WebSecurityConfigurerAdapter配置</h3><p>把这个<code>CustomAuthenticationFilter</code>加到spring security的众多filter里面.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">configure</span><span class="params">(HttpSecurity http)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    http</span><br><span class="line">            .cors().and()</span><br><span class="line">            .antMatcher(<span class="string">"/**"</span>).authorizeRequests()</span><br><span class="line">            .antMatchers(<span class="string">"/"</span>, <span class="string">"/login**"</span>).permitAll()</span><br><span class="line">            .anyRequest().authenticated()</span><br><span class="line">            <span class="comment">//这里必须要写formLogin()，不然原有的UsernamePasswordAuthenticationFilter不会出现，也就无法配置我们重新的UsernamePasswordAuthenticationFilter</span></span><br><span class="line">            .and().formLogin().loginPage(<span class="string">"/"</span>)</span><br><span class="line">            .and().csrf().disable();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//用重写的Filter替换掉原有的UsernamePasswordAuthenticationFilter</span></span><br><span class="line">    http.addFilterAt(customAuthenticationFilter(),</span><br><span class="line">    UsernamePasswordAuthenticationFilter.class);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//注册自定义的UsernamePasswordAuthenticationFilter</span></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function">CustomAuthenticationFilter <span class="title">customAuthenticationFilter</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    CustomAuthenticationFilter filter = <span class="keyword">new</span> CustomAuthenticationFilter();</span><br><span class="line">    filter.setAuthenticationSuccessHandler(<span class="keyword">new</span> SuccessHandler());</span><br><span class="line">    filter.setAuthenticationFailureHandler(<span class="keyword">new</span> FailureHandler());</span><br><span class="line">    filter.setFilterProcessesUrl(<span class="string">"/login/self"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//这句很关键，重用WebSecurityConfigurerAdapter配置的AuthenticationManager，不然要自己组装AuthenticationManager</span></span><br><span class="line">    filter.setAuthenticationManager(authenticationManagerBean());</span><br><span class="line">    <span class="keyword">return</span> filter;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="封装AuthenticationBean类，用lombok简化代码"><a href="#封装AuthenticationBean类，用lombok简化代码" class="headerlink" title="封装AuthenticationBean类，用lombok简化代码"></a>封装AuthenticationBean类，用lombok简化代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.template.bean;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lombok.Getter;</span><br><span class="line"><span class="keyword">import</span> lombok.Setter;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Getter</span></span><br><span class="line"><span class="meta">@Setter</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AuthenticationBean</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Vue的配置"><a href="#Vue的配置" class="headerlink" title="Vue的配置"></a>Vue的配置</h2><h3 id="request配置"><a href="#request配置" class="headerlink" title="request配置"></a>request配置</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> request <span class="keyword">from</span> <span class="string">'@/utils/request'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">login</span>(<span class="params">username, password</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> request(&#123;</span><br><span class="line">    url: <span class="string">'/user/login'</span>,</span><br><span class="line">    method: <span class="string">'post'</span>,</span><br><span class="line">    <span class="comment">// 封装JSON</span></span><br><span class="line">    data: &#123;</span><br><span class="line">      username,</span><br><span class="line">      password</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p><img src="https://images.gitee.com/uploads/images/2019/0123/132430_d446b6c2_438941.png" alt="登录成功" title="屏幕截图.png"></p>
+<p>在浏览器Network中查看Response</p>
+<p><img src="https://images.gitee.com/uploads/images/2019/0123/132918_23e01d9d_438941.png" alt="Network中查看Response" title="屏幕截图.png"></p>
+<p>由于我们前后端分类，前端使用的是8080端口，后端使用的是8081端口。所以需要配置一下<code>vue.config.js</code>,允许跨域。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  devServer: &#123;</span><br><span class="line">    proxy: &#123;</span><br><span class="line">      <span class="string">'/'</span>: &#123;</span><br><span class="line">        target: <span class="string">'http://localhost:8081'</span>,</span><br><span class="line">        changeOrigin: <span class="literal">true</span>,</span><br><span class="line">        pathRewrite: &#123;</span><br><span class="line">          <span class="string">'^/'</span>: <span class="string">''</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="后话"><a href="#后话" class="headerlink" title="后话"></a>后话</h1><p><code>Request.java</code>可以debug htpp request请求，包位置和关键<code>method</code>如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.apache.catalina.connector;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Wrapper object for the Coyote request.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Remy Maucherat</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Craig R. McClanahan</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Request</span> <span class="keyword">implements</span> <span class="title">org</span>.<span class="title">apache</span>.<span class="title">catalina</span>.<span class="title">servlet4preview</span>.<span class="title">http</span>.<span class="title">HttpServletRequest</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Parse request parameters.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">parseParameters</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">//...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="参考网址"><a href="#参考网址" class="headerlink" title="参考网址"></a>参考网址</h1><ul>
+<li><a href="https://www.jianshu.com/p/693914564406" target="_blank" rel="noopener">Spring Security配置JSON登录</a></li>
+<li><a href="https://stackoverflow.com/questions/19500332/spring-security-and-json-authentication" target="_blank" rel="noopener">Spring Security and JSON Authentication</a></li>
+<li><a href="https://cli.vuejs.org/zh/guide/mode-and-env.html#%E5%9C%A8%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%BE%A7%E4%BB%A3%E7%A0%81%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F" target="_blank" rel="noopener">在客户端侧代码中使用环境变量</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2016/04/cors.html" target="_blank" rel="noopener">跨域资源共享 CORS 详解</a></li>
+<li><a href="http://spring.io/blog/2015/06/08/cors-support-in-spring-framework" target="_blank" rel="noopener">CORS support in Spring Framework</a></li>
+<li>[<a href="https://www.cnblogs.com/btgyoyo/p/6141480.html" target="_blank" rel="noopener">HTTP请求中的form data和request payload的区别</a>]</li>
+<li><code>未验证：</code><a href="https://blog.csdn.net/hhaojian/article/details/78930591" target="_blank" rel="noopener">Spring Security拦截器引起Java CORS跨域失败的问题</a></li>
+</ul>
+<p><a id="jump_1"></a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="无 wechat" style="width: 200px; max-width: 100%;">
+    <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>欢迎打赏</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="无 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="无 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/22/2019/使用Mock进行接口数据模拟/" rel="next" title="使用Mock来模拟响应式API">
+                <i class="fa fa-chevron-left"></i> 使用Mock来模拟响应式API
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/24/2019/201901-03/Springboot实现跨域/" rel="prev" title="Springboot实现跨域">
+                Springboot实现跨域 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">无</p>
+              <p class="site-description motion-element" itemprop="description">一些文档</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/bxh7425014" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/yiyixiaozhi" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-blind"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/u/1935290765" target="_blank" title="微博">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>微博</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-globe"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://macshuo.com/" title="MacTalk" target="_blank">MacTalk</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://dbanotes.net/" title="闲思录" target="_blank">闲思录</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringSecurity本身对于Login-Parameter的登录处理"><span class="nav-number">1.</span> <span class="nav-text">SpringSecurity本身对于Login Parameter的登录处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#换用JSON方式来登录"><span class="nav-number">1.1.</span> <span class="nav-text">换用JSON方式来登录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringSecurity配置调整"><span class="nav-number">1.2.</span> <span class="nav-text">SpringSecurity配置调整</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#重写UsernamePasswordAnthenticationFilter"><span class="nav-number">1.2.1.</span> <span class="nav-text">重写UsernamePasswordAnthenticationFilter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WebSecurityConfigurerAdapter配置"><span class="nav-number">1.2.2.</span> <span class="nav-text">WebSecurityConfigurerAdapter配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#封装AuthenticationBean类，用lombok简化代码"><span class="nav-number">1.2.3.</span> <span class="nav-text">封装AuthenticationBean类，用lombok简化代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue的配置"><span class="nav-number">1.3.</span> <span class="nav-text">Vue的配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#request配置"><span class="nav-number">1.3.1.</span> <span class="nav-text">request配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#效果"><span class="nav-number">1.3.2.</span> <span class="nav-text">效果</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#后话"><span class="nav-number">2.</span> <span class="nav-text">后话</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考网址"><span class="nav-number">3.</span> <span class="nav-text">参考网址</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">无</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
